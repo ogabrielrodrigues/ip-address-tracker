@@ -1,3 +1,6 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["next/core-web-vitals", "@pretty-eslint/eslint-config/react"],
+  "rules": {
+    "import-helpers/order-imports": "off"
+  }
 }
