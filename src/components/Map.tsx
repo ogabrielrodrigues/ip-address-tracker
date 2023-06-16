@@ -11,12 +11,11 @@ type MapProps = {
   location: [number, number]
 } & MapContainerProps
 
-const Map = ({ location, ...props }: MapProps) => {
+function Map({ location, ...props }: MapProps) {
   const [center, setCenter] = useState(location)
   const mapRef = useRef<MapType>(null)
 
   useEffect(() => {
-    console.log('render')
     setCenter(location)
     mapRef.current?.flyTo(location, 14)
   }, [location])

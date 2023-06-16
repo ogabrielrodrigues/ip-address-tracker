@@ -1,13 +1,16 @@
 'use client'
+import dynamic from 'next/dynamic'
 
 import Image from 'next/image'
 import { useRef, useState } from 'react'
 import { api } from '@/lib/axios'
 
-import Map from '../components/Map'
-
 import arrowIcon from '../assets/icon-arrow.svg'
 import { minifyIspName } from '@/aux/minifyIspName'
+
+const Map = dynamic(() => import('../components/Map'), {
+  ssr: false
+})
 
 const API_AUTH = process.env.NEXT_PUBLIC_API_AUTH
 
@@ -45,7 +48,6 @@ interface APIResponse {
 }
 
 export default function Home() {
-  // const [ip, setIp] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
 
   const [location, setLocation] = useState<Location>({
@@ -122,7 +124,7 @@ export default function Home() {
           </div>
         </main>
       </section>
-      <Map location={[location.lat, location.lng]} className="z-10 h-full overflow-hidden"></Map>
+      <Map location={[location.lat, location.lng]} className="z-10 h-full overflow-hidden" />
     </div>
   )
 }
